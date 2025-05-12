@@ -17,7 +17,7 @@ yarn add @kaimeleon/temporal-sdk
 ## Usage
 
 ```typescript
-import { KaiTemporalClient } from '@kai/temporal-sdk';
+import { KaiTemporalClient } from '@kaimeleon/temporal-sdk';
 
 // Initialize the client
 const temporalClient = new KaiTemporalClient({
@@ -101,7 +101,7 @@ When implementing workflows, always follow these guidelines:
 
 ```typescript
 // In the workflow implementation file
-import { SomeWorkflowParams } from '@kai/temporal-sdk';
+import { SomeWorkflowParams } from '@kaimeleon/temporal-sdk';
 
 export async function myWorkflow(
   user: User,
@@ -114,7 +114,7 @@ export async function myWorkflow(
 2. **Use the central task queue**: All workflows should use the central `KAI_TASK_QUEUE` for consistency:
 
 ```typescript
-import { KAI_TASK_QUEUE } from '@kai/temporal-sdk';
+import { KAI_TASK_QUEUE } from '@kaimeleon/temporal-sdk';
 
 const { myActivity } = workflow.proxyActivities<typeof activities>({
   taskQueue: KAI_TASK_QUEUE,
