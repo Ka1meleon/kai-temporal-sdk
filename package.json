@@ -1,5 +1,5 @@
 {
-  "name": "@kai/temporal-sdk",
+  "name": "@kaimeleon/temporal-sdk",
   "version": "1.0.0",
   "description": "A type-safe client for interacting with Kaimeleon's Temporal workflows",
   "main": "dist/index.js",
@@ -29,6 +29,7 @@
     "@temporalio/workflow": "^1.11.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "zod": "^3.24.4"
   },
   "devDependencies": {

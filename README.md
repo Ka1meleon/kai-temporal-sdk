@@ -5,13 +5,13 @@ A type-safe client for interacting with Temporal workflows.
 ## Installation
 
 ```bash
-npm install @kai/temporal-sdk
+npm install @kaimeleon/temporal-sdk
 ```
 
 Or with yarn:
 
 ```bash
-yarn add @kai/temporal-sdk
+yarn add @kaimeleon/temporal-sdk
 ```
 
 ## Usage
