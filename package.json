@@ -1,0 +1,37 @@
+{
+  "name": "@kai/temporal-sdk",
+  "version": "1.0.0",
+  "description": "A type-safe client for interacting with Kaimeleon's Temporal workflows",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "temporal",
+    "workflow",
+    "sdk",
+    "typescript"
+  ],
+  "author": "Kaimeleon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ka1meleon/kai-temporal.git"
+  },
+  "peerDependencies": {
+    "@temporalio/client": "^1.11.0",
+    "@temporalio/workflow": "^1.11.0"
+  },
+  "dependencies": {
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
