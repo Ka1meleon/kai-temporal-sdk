@@ -4,7 +4,7 @@
 
 import { User } from '@supabase/supabase-js';
 
-import { OpenAIToolCallDto } from './llm/openai-tool-call.dto';
+import { OpenAIToolCallDto } from './llm';
 
 export interface OpenAIToolCallParams {
   user: User;

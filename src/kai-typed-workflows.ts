@@ -9,7 +9,7 @@ import {
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
 } from './models/meeting-agenda.model';
-import { MeetingAgendaDto } from './models/meeting-agendas/meeting-agenda.dto';
+import { MeetingAgendaDto } from './models/meeting-agendas';
 import {
   GetMeetingsParams,
   GetMeetingByIdParams,
@@ -17,7 +17,7 @@ import {
   UpdateMeetingParams,
   DeleteMeetingParams,
 } from './models/meeting.model';
-import { MeetingDto } from './models/meetings/meeting.dto';
+import { MeetingDto } from './models/meetings';
 import { OpenAIToolCallParams } from './models/tools.model';
 import { WorkflowResult, KAI_TASK_QUEUE } from './models/workflow.model';
 

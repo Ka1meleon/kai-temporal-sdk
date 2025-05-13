@@ -43,3 +43,4 @@ lerna-debug.log*
 .aider*
 
 .mcp.json
+**/.claude/settings.local.json
