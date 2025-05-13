@@ -10,7 +10,10 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build",
+    "lint": "eslint \"src/**/*.ts\"   --fix",
+    "format": "prettier --write \"src/**/*.ts\"  ",
+    "fl": "npm run format && npm run lint"
   },
   "keywords": [
     "temporal",
@@ -29,8 +32,24 @@
     "@temporalio/workflow": "^1.11.0"
   },
   "dependencies": {
+    "@nestjs/swagger": "^11.2.0",
+    "@nestjs/common": "^11.0.1",
+    "class-transformer": "^0.5.1",
     "@supabase/supabase-js": "^2.49.4",
-    "zod": "^3.24.4"
+    "class-validator": "^0.14.2",
+    "zod": "^3.24.4",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "@nestjs/schematics": "^11.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^4.3.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.5",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.20.0"
   },
   "devDependencies": {
     "typescript": "^5.7.3"

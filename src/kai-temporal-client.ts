@@ -1,12 +1,8 @@
-import { Connection, Client } from '@temporalio/client';
+import { Connection, Client, WorkflowStartOptions } from '@temporalio/client';
 
 import { createWorkflows } from './kai-typed-workflows';
-import {
-  KaiTemporalClientOptions,
-  WorkflowRegistry,
-  WorkflowResult,
-  WorkflowStartOptions,
-} from './models';
+import { WorkflowRegistry } from './models';
+import { KaiTemporalClientOptions, WorkflowResult } from './models/workflow.model';
 
 /**
  * A client for Temporal that provides type-safe access to workflows
@@ -64,7 +60,7 @@ export class KaiTemporalClient {
     workflowName: string,
     taskQueue: string,
     args: unknown[],
-    options: WorkflowStartOptions = {},
+    options: WorkflowStartOptions,
   ): Promise<WorkflowResult<T>> {
     await this.ensureInitialized();
     const { workflowId = `${workflowName}-${Date.now()}`, workflowExecutionTimeout } = options;

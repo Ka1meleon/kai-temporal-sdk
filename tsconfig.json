@@ -12,24 +12,8 @@
     "noImplicitAny": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@common/*": ["./src/common/*"],
-      "@common": ["./src/common"],
-      "@libs/*": ["./src/libs/*"],
-      "@libs": ["./src/libs"],
-      "@temporal/*": ["./src/temporal/*"],
-      "@temporal": ["./src/temporal"],
-      "@tools/*": ["./src/tools/*"],
-      "@tools": ["./src/tools"],
-      "@api-gateway/*": ["./src/api-gateway/*"],
-      "@api-gateway": ["./src/api-gateway"]
-    }
+    "experimentalDecorators": true
   },
-  "include": [
-    "./**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

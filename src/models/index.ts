@@ -2,20 +2,13 @@
  * Central export file for all models in the Kai Temporal SDK
  */
 
-export * from './workflow.model';
-export * from './meeting.model';
-export * from './meeting-agenda.model';
-export * from './pagination.model';
-export * from './tools.model';
-
-// Define registry after importing all component types
+import { PaginatedResponseDto } from './common';
 import {
   GetMeetingAgendasParams,
   GetMeetingAgendaByIdParams,
   CreateMeetingAgendaParams,
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
-  MeetingAgenda,
 } from './meeting-agenda.model';
 import {
   GetMeetingsParams,
@@ -23,9 +16,8 @@ import {
   CreateMeetingParams,
   UpdateMeetingParams,
   DeleteMeetingParams,
-  MeetingDto,
 } from './meeting.model';
-import { PaginatedResponseDto } from './pagination.model';
+import { MeetingDto, MeetingAgenda } from './meetings';
 import { OpenAIToolCallParams } from './tools.model';
 import { WorkflowFunction } from './workflow.model';
 

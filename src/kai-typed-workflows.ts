@@ -1,30 +1,24 @@
+import { WorkflowStartOptions } from '@temporalio/client';
+
+import { WorkflowRegistry } from './models';
+import { PaginatedResponseDto } from './models/common';
 import {
-  // Workflow models
-  KAI_TASK_QUEUE,
-  WorkflowStartOptions,
-  WorkflowResult,
-  WorkflowRegistry,
-
-  // Meeting models
-  GetMeetingsParams,
-  GetMeetingByIdParams,
-  CreateMeetingParams,
-  UpdateMeetingParams,
-  DeleteMeetingParams,
-  MeetingDto,
-
-  // Meeting Agenda models
   GetMeetingAgendasParams,
   GetMeetingAgendaByIdParams,
   CreateMeetingAgendaParams,
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
-  MeetingAgenda,
-
-  // Other models
-  OpenAIToolCallParams,
-  PaginatedResponseDto,
-} from './models';
+} from './models/meeting-agenda.model';
+import {
+  GetMeetingsParams,
+  GetMeetingByIdParams,
+  CreateMeetingParams,
+  UpdateMeetingParams,
+  DeleteMeetingParams,
+} from './models/meeting.model';
+import { MeetingDto, MeetingAgenda } from './models/meetings';
+import { OpenAIToolCallParams } from './models/tools.model';
+import { WorkflowResult, KAI_TASK_QUEUE } from './models/workflow.model';
 
 /**
  * Workflow implementation factory
@@ -56,6 +50,7 @@ export function createWorkflows(
         [user, queryDto],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 120000, // 2 minutes timeout for the entire workflow
         },
       );
@@ -73,6 +68,7 @@ export function createWorkflows(
         [user, meetingId],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -90,6 +86,7 @@ export function createWorkflows(
         [user, meetingData],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -107,6 +104,7 @@ export function createWorkflows(
         [user, meetingId, meetingData],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -124,6 +122,7 @@ export function createWorkflows(
         [user, meetingId],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -142,6 +141,7 @@ export function createWorkflows(
         [user, queryFilters],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 120000, // 2 minutes timeout
         },
       );
@@ -159,6 +159,7 @@ export function createWorkflows(
         [user, agendaId],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -176,6 +177,7 @@ export function createWorkflows(
         [user, meetingAgendaData],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -193,6 +195,7 @@ export function createWorkflows(
         [user, agendaId, meetingAgendaData],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -210,6 +213,7 @@ export function createWorkflows(
         [user, agendaId],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 60000, // 1 minute timeout
         },
       );
@@ -228,6 +232,7 @@ export function createWorkflows(
         [user, toolCallMessage],
         {
           workflowId,
+          taskQueue: KAI_TASK_QUEUE,
           workflowExecutionTimeout: 120000, // 2 minutes timeout
         },
       );
