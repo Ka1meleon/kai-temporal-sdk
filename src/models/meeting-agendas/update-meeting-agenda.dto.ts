@@ -1,3 +1,3 @@
 import { MeetingAgendaDto } from './meeting-agenda.dto';
 
-export class UpdateMeetingAgendaDto extends Partial<MeetingAgendaDto> {}
+export class UpdateMeetingAgendaDto implements Partial<MeetingAgendaDto> {}
