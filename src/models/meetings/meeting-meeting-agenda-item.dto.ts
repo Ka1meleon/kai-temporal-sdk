@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
 
-export class MeetingAgendaItem {
+export class MeetingMeetingAgendaItem {
   @ApiPropertyOptional({
     description: 'Unique identifier for the meeting agenda item',
     example: '550e8400-e29b-41d4-a716-446655440000',

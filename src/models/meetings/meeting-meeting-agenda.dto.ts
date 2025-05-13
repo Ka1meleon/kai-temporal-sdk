@@ -9,9 +9,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { MeetingAgendaCategory } from './meeting-agenda-category.dto';
+import { MeetingMeetingAgendaCategory } from './meeting-meeting-agenda-category.dto';
 
-export class MeetingAgenda {
+export class MeetingMeetingAgenda {
   @ApiPropertyOptional({
     description: 'Unique identifier for the meeting agenda',
     example: '550e8400-e29b-41d4-a716-446655440000',
@@ -30,7 +30,7 @@ export class MeetingAgenda {
 
   @ApiProperty({
     description: 'Categories of meeting agenda items',
-    type: [MeetingAgendaCategory],
+    type: [MeetingMeetingAgendaCategory],
     example: [
       {
         category: 'Project Updates',
@@ -44,8 +44,8 @@ export class MeetingAgenda {
   @IsArray()
   @ValidateNested({ each: true })
   @ArrayMinSize(1)
-  @Type(() => MeetingAgendaCategory)
-  categories: MeetingAgendaCategory[];
+  @Type(() => MeetingMeetingAgendaCategory)
+  categories: MeetingMeetingAgendaCategory[];
 
   @ApiProperty({
     description: 'Created at',

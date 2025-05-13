@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsArray, ValidateIf } from 'class-validator';
 
-import { MeetingAgenda } from './meeting-agenda.dto';
+import { MeetingMeetingAgenda } from './meeting-meeting-agenda.dto';
 
 export class MeetingDto {
   @ApiPropertyOptional({ description: 'Unique identifier for the meeting' })
@@ -93,7 +93,7 @@ export class MeetingDto {
   })
   @IsOptional()
   @ValidateIf(o => o.agenda !== null)
-  agenda?: MeetingAgenda | null;
+  agenda?: MeetingMeetingAgenda | null;
 
   @ApiPropertyOptional({ description: 'Meeting transcription' })
   @IsOptional()
