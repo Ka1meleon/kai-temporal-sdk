@@ -4,8 +4,7 @@
 
 import { User } from '@supabase/supabase-js';
 
-import { MeetingAgendaQueryDto } from './meeting-agendas';
-import { MeetingMeetingAgenda } from './meetings';
+import { MeetingAgendaDto, MeetingAgendaQueryDto } from './meeting-agendas';
 
 // Parameter types for specific workflows
 export interface GetMeetingAgendasParams {
@@ -20,13 +19,13 @@ export interface GetMeetingAgendaByIdParams {
 
 export interface CreateMeetingAgendaParams {
   user: User;
-  meetingAgendaData: MeetingMeetingAgenda;
+  meetingAgendaData: MeetingAgendaDto;
 }
 
 export interface UpdateMeetingAgendaParams {
   user: User;
   agendaId: string;
-  meetingAgendaData: Partial<MeetingMeetingAgenda>;
+  meetingAgendaData: Partial<MeetingAgendaDto>;
 }
 
 export interface DeleteMeetingAgendaParams {
