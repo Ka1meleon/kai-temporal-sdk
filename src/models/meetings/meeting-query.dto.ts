@@ -4,8 +4,6 @@ export class MeetingQueryDto {
   search?: string;
   sort?: string = 'createdAt';
   sortDirection?: string = 'desc';
-  year?: number;
-  month?: number;
-  week?: number;
-  day?: number;
+  fromDate?: Date;
+  toDate?: Date;
 }
