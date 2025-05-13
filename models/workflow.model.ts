@@ -16,7 +16,10 @@ export interface WorkflowResult<T = any> {
  */
 export interface KaiTemporalClientOptions {
   address?: string;
+  tls?: boolean;
+  apiKey?: string;
   namespace?: string;
+  metadata?: Record<string, string>;
 }
 
 /**

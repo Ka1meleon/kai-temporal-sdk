@@ -25,6 +25,9 @@ export class KaiTemporalClient {
     try {
       const connection = await Connection.connect({
         address: options.address || 'localhost:7233',
+        tls: options.tls || false,
+        apiKey: options.apiKey || undefined,
+        metadata: options.metadata || {},
       });
 
       this.client = new Client({
