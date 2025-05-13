@@ -4,8 +4,7 @@
 
 import { User } from '@supabase/supabase-js';
 
-import { MeetingAgendaQueryDto } from './meeting-agendas/meeting-agenda-query.dto';
-import { MeetingAgendaDto } from './meeting-agendas/meeting-agenda.dto';
+import { MeetingAgendaQueryDto, MeetingAgendaDto } from './meeting-agendas';
 
 // Parameter types for specific workflows
 export interface GetMeetingAgendasParams {

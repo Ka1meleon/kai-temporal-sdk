@@ -4,9 +4,7 @@
 
 import { User } from '@supabase/supabase-js';
 
-import { MeetingQueryDto } from './meetings/meeting-query.dto';
-import { MeetingDto } from './meetings/meeting.dto';
-import { UpdateMeetingDto } from './meetings/update-meeting.dto';
+import { MeetingQueryDto, MeetingDto, UpdateMeetingDto } from './meetings';
 
 // Parameter types for specific workflows
 export interface GetMeetingsParams {
