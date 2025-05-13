@@ -30,7 +30,7 @@ export class MeetingMeetingAgendaCategory {
 
   @ApiProperty({
     description: 'List of meeting agenda items in this category',
-    type: [MeetingMeetingAgendaItem],
+    type: () => [MeetingMeetingAgendaItem],
     example: [{ title: 'Frontend development progress' }, { title: 'Backend integration issues' }],
   })
   @IsArray()
