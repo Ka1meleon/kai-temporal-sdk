@@ -10,6 +10,7 @@ import {
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
 } from './meeting-agenda.model';
+import { MeetingAgendaDto } from './meeting-agendas';
 import {
   GetMeetingsParams,
   GetMeetingByIdParams,
@@ -17,7 +18,7 @@ import {
   UpdateMeetingParams,
   DeleteMeetingParams,
 } from './meeting.model';
-import { MeetingDto, MeetingMeetingAgenda } from './meetings';
+import { MeetingDto } from './meetings';
 import { OpenAIToolCallParams } from './tools.model';
 import { WorkflowFunction } from './workflow.model';
 
@@ -33,10 +34,13 @@ export interface WorkflowRegistry {
   deleteMeeting: WorkflowFunction<DeleteMeetingParams, { success: boolean }>;
 
   // Meeting Agenda workflows
-  getMeetingAgendas: WorkflowFunction<GetMeetingAgendasParams, PaginatedResponseDto<MeetingMeetingAgenda>>;
-  getMeetingAgendaById: WorkflowFunction<GetMeetingAgendaByIdParams, MeetingMeetingAgenda | null>;
-  createMeetingAgenda: WorkflowFunction<CreateMeetingAgendaParams, MeetingMeetingAgenda>;
-  updateMeetingAgenda: WorkflowFunction<UpdateMeetingAgendaParams, MeetingMeetingAgenda | null>;
+  getMeetingAgendas: WorkflowFunction<
+    GetMeetingAgendasParams,
+    PaginatedResponseDto<MeetingAgendaDto>
+  >;
+  getMeetingAgendaById: WorkflowFunction<GetMeetingAgendaByIdParams, MeetingAgendaDto | null>;
+  createMeetingAgenda: WorkflowFunction<CreateMeetingAgendaParams, MeetingAgendaDto>;
+  updateMeetingAgenda: WorkflowFunction<UpdateMeetingAgendaParams, MeetingAgendaDto | null>;
   deleteMeetingAgenda: WorkflowFunction<DeleteMeetingAgendaParams, { success: boolean }>;
 
   // Other workflows
