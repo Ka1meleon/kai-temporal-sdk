@@ -10,7 +10,7 @@ import {
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
 } from './meeting-agenda.model';
-import { MeetingAgendaDto } from './meeting-agendas';
+import { MeetingAgendaDto } from './meeting-agendas/meeting-agenda.dto';
 import {
   GetMeetingsParams,
   GetMeetingByIdParams,
@@ -18,7 +18,7 @@ import {
   UpdateMeetingParams,
   DeleteMeetingParams,
 } from './meeting.model';
-import { MeetingDto } from './meetings';
+import { MeetingDto } from './meetings/meeting.dto';
 import { OpenAIToolCallParams } from './tools.model';
 import { WorkflowFunction } from './workflow.model';
 
