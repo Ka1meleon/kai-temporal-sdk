@@ -9,6 +9,7 @@ import {
   UpdateMeetingAgendaParams,
   DeleteMeetingAgendaParams,
 } from './models/meeting-agenda.model';
+import { MeetingAgendaDto } from './models/meeting-agendas';
 import {
   GetMeetingsParams,
   GetMeetingByIdParams,
@@ -16,7 +17,7 @@ import {
   UpdateMeetingParams,
   DeleteMeetingParams,
 } from './models/meeting.model';
-import { MeetingDto, MeetingMeetingAgenda } from './models/meetings';
+import { MeetingDto } from './models/meetings';
 import { OpenAIToolCallParams } from './models/tools.model';
 import { WorkflowResult, KAI_TASK_QUEUE } from './models/workflow.model';
 
@@ -132,10 +133,10 @@ export function createWorkflows(
     getMeetingAgendas: async (
       workflowId: string,
       params: GetMeetingAgendasParams,
-    ): Promise<WorkflowResult<PaginatedResponseDto<MeetingMeetingAgenda>>> => {
+    ): Promise<WorkflowResult<PaginatedResponseDto<MeetingAgendaDto>>> => {
       await ensureInitialized();
       const { user, queryFilters } = params;
-      return startWorkflow<PaginatedResponseDto<MeetingMeetingAgenda>>(
+      return startWorkflow<PaginatedResponseDto<MeetingAgendaDto>>(
         'getMeetingAgendasWorkflow',
         KAI_TASK_QUEUE,
         [user, queryFilters],
@@ -150,10 +151,10 @@ export function createWorkflows(
     getMeetingAgendaById: async (
       workflowId: string,
       params: GetMeetingAgendaByIdParams,
-    ): Promise<WorkflowResult<MeetingMeetingAgenda | null>> => {
+    ): Promise<WorkflowResult<MeetingAgendaDto | null>> => {
       await ensureInitialized();
       const { user, agendaId } = params;
-      return startWorkflow<MeetingMeetingAgenda | null>(
+      return startWorkflow<MeetingAgendaDto | null>(
         'getMeetingAgendaByIdWorkflow',
         KAI_TASK_QUEUE,
         [user, agendaId],
@@ -168,10 +169,10 @@ export function createWorkflows(
     createMeetingAgenda: async (
       workflowId: string,
       params: CreateMeetingAgendaParams,
-    ): Promise<WorkflowResult<MeetingMeetingAgenda>> => {
+    ): Promise<WorkflowResult<MeetingAgendaDto>> => {
       await ensureInitialized();
       const { user, meetingAgendaData } = params;
-      return startWorkflow<MeetingMeetingAgenda>(
+      return startWorkflow<MeetingAgendaDto>(
         'createMeetingAgendaWorkflow',
         KAI_TASK_QUEUE,
         [user, meetingAgendaData],
@@ -186,10 +187,10 @@ export function createWorkflows(
     updateMeetingAgenda: async (
       workflowId: string,
       params: UpdateMeetingAgendaParams,
-    ): Promise<WorkflowResult<MeetingMeetingAgenda | null>> => {
+    ): Promise<WorkflowResult<MeetingAgendaDto | null>> => {
       await ensureInitialized();
       const { user, agendaId, meetingAgendaData } = params;
-      return startWorkflow<MeetingMeetingAgenda | null>(
+      return startWorkflow<MeetingAgendaDto | null>(
         'updateMeetingAgendaWorkflow',
         KAI_TASK_QUEUE,
         [user, agendaId, meetingAgendaData],
