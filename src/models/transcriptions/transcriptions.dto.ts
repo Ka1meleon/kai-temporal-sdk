@@ -15,7 +15,6 @@ export class ParagraphDto {
 export class CreateTranscriptionDto {
   paragraphs: ParagraphDto[];
   language: string;
-  contextId: string;
 }
 
 export class TranscriptionResponseDto {
