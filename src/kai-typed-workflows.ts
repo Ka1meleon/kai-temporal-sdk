@@ -1,6 +1,10 @@
 import { WorkflowStartOptions } from '@temporalio/client';
 
 import { WorkflowRegistry } from './models';
+import {
+  UpdateMeetingAgendaItemsParams,
+  UpdateMeetingAgendaItemsResponseDto,
+} from './models/meetings/update-meeting-agenda-items.dto';
 import { OpenAIToolCallParams } from './models/tools.model';
 import { WorkflowResult, KAI_TASK_QUEUE } from './models/workflow.model';
 
@@ -214,6 +218,24 @@ export function createWorkflows(
         'askKaiWorkflow',
         KAI_TASK_QUEUE,
         [user, toolCallMessage],
+        {
+          workflowId,
+          taskQueue: KAI_TASK_QUEUE,
+          workflowExecutionTimeout: 120000, // 2 minutes timeout
+        },
+      );
+    },
+
+    updateMeetingAgendaItems: async (
+      workflowId: string,
+      params: UpdateMeetingAgendaItemsParams,
+    ): Promise<WorkflowResult<UpdateMeetingAgendaItemsResponseDto>> => {
+      await ensureInitialized();
+      const { user, input } = params;
+      return startWorkflow<UpdateMeetingAgendaItemsResponseDto>(
+        'updateMeetingAgendaItemsWorkflow',
+        KAI_TASK_QUEUE,
+        [user, input],
         {
           workflowId,
           taskQueue: KAI_TASK_QUEUE,

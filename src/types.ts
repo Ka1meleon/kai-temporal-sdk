@@ -23,9 +23,7 @@ export * from './models/meetings/meeting-meeting-agenda.dto';
 export * from './models/meetings/meeting-meeting-agenda-category.dto';
 export * from './models/meetings/meeting-meeting-agenda-item.dto';
 export * from './models/meetings/update-meeting.dto';
-
-// Transcription types
-export * from './models/transcriptions/transcriptions.dto';
+export * from './models/meetings/update-meeting-agenda-items.dto';
 
 // Workflow types
 export {
