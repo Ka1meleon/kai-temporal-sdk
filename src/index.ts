@@ -35,3 +35,6 @@ export { KaiTemporalClient } from './kai-temporal-client';
 
 // Export all models
 export * from './models';
+
+// Export all types for easy frontend use
+export * from './types';
