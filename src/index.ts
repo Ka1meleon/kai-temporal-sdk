@@ -1,40 +1,27 @@
 /**
- * Kai Temporal SDK
- *
- * The SDK provides a clean, type-safe interface for client code to interact with workflows.
- * It abstracts away the details of the Temporal API and provides a simple, intuitive way
- * to execute workflows.
- *
- * Usage:
- * ```typescript
- * import { KaiTemporalClient } from '@kai/temporal-sdk';
- *
- * // Initialize the client
- * const temporalClient = new KaiTemporalClient({
- *   address: process.env.TEMPORAL_ADDRESS || 'localhost:7233',
- *   namespace: process.env.TEMPORAL_NAMESPACE || 'default',
- * });
- *
- * // Use a workflow
- * const workflowId = `workflow-${Date.now()}`;
- * const handle = await temporalClient.workflows.someWorkflow(workflowId, {
- *   param1: 'value1',
- *   param2: 'value2',
- * });
- *
- * return handle.result;
- * ```
- *
- * When implementing workflows for this SDK, follow these guidelines:
- * 1. Use SDK interfaces for parameter and return types
- * 2. Use the central KAI_TASK_QUEUE for consistency
- * 3. Handle errors properly using workflow.ApplicationFailure
+ * Types index file
+ * Export all types from the SDK for frontend use
  */
 
-export { KaiTemporalClient } from './kai-temporal-client';
+// Common types
+export * from './constants';
+export * from './models/common/pagination.dto';
 
-// Export all models
-export * from './models';
+// LLM related types
+export * from './models/llm/openai-tool-call.dto';
 
-// Export all types for easy frontend use
-export * from './types';
+// Meeting agenda types
+export * from './models/meeting-agendas/meeting-agenda.dto';
+export * from './models/meeting-agendas/meeting-agenda-category.dto';
+export * from './models/meeting-agendas/meeting-agenda-category-item.dto';
+export * from './models/meeting-agendas/meeting-agenda-query.dto';
+export * from './models/meeting-agendas/update-meeting-agenda.dto';
+
+// Meeting types
+export * from './models/meetings/meeting.dto';
+export * from './models/meetings/meeting-query.dto';
+export * from './models/meetings/meeting-meeting-agenda.dto';
+export * from './models/meetings/meeting-meeting-agenda-category.dto';
+export * from './models/meetings/meeting-meeting-agenda-item.dto';
+export * from './models/meetings/update-meeting.dto';
+export * from './models/meetings/update-meeting-agenda-items.dto';
