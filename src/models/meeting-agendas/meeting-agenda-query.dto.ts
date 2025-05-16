@@ -1,7 +1,4 @@
-export enum SortDirection {
-  ASC = 'asc',
-  DESC = 'desc',
-}
+import { SortDirection } from '../common';
 
 export class MeetingAgendaQueryDto {
   page?: number = 1;

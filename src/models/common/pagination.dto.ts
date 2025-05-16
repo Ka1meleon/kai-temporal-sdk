@@ -6,7 +6,7 @@ export class PaginationDto {
 export class SearchPaginationDto extends PaginationDto {
   search?: string;
   sort?: string = 'createdAt';
-  sortDirection?: string = 'desc';
+  sortDirection?: SortDirection;
 }
 
 export class PaginatedResponseDto<T> {
@@ -19,5 +19,9 @@ export class PaginatedResponseDto<T> {
   hasPrevPage: boolean;
   search?: string;
   sort?: string;
-  sortDirection?: string;
+  sortDirection?: SortDirection;
+}
+export enum SortDirection {
+  ASC = 'asc',
+  DESC = 'desc',
 }
