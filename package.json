@@ -1,6 +1,6 @@
 {
   "name": "@kaimeleon/temporal-sdk",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A type-safe client for interacting with Kaimeleon's Temporal workflows",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
