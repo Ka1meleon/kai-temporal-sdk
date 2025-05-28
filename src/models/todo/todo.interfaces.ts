@@ -5,11 +5,11 @@ export interface TodoDto {
   description?: string;
   status: TodoStatus;
   priority: TodoPriority;
-  dueDate?: Date;
-  completedAt?: Date;
+  dueDate?: string;
+  completedAt?: string;
   orderIndex: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export enum TodoStatus {
@@ -32,7 +32,7 @@ export interface CreateTodoDto {
   description?: string;
   status?: TodoStatus;
   priority?: TodoPriority;
-  dueDate?: Date;
+  dueDate?: string;
   orderIndex?: number;
 }
 
@@ -43,7 +43,7 @@ export interface UpdateTodoDto {
   description?: string;
   status?: TodoStatus;
   priority?: TodoPriority;
-  dueDate?: Date;
+  dueDate?: string;
   orderIndex?: number;
 }
 
