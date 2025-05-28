@@ -65,6 +65,8 @@ export interface ListTodosDto {
   limit?: number;
   sortBy?: 'createdAt' | 'updatedAt' | 'dueDate' | 'orderIndex';
   sortOrder?: 'asc' | 'desc';
+  fromDate?: string;
+  toDate?: string;
 }
 
 export interface ListTodosResultDto {
@@ -119,4 +121,6 @@ export interface ListTodosQueryDto {
   limit?: number;
   sortBy?: 'createdAt' | 'updatedAt' | 'dueDate' | 'orderIndex';
   sortOrder?: 'asc' | 'desc';
+  fromDate?: string;
+  toDate?: string;
 }
