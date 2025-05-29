@@ -27,3 +27,6 @@ export * from './models/meetings/update-meeting-agenda-items.dto';
 
 // Todo types
 export * from './models/todo';
+
+// User account types
+export * from './models/user-accounts/user-preferences.dto';
