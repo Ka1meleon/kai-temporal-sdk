@@ -1,4 +1,4 @@
-export interface Todo {
+export interface TodoDto {
   id: string;
   userId: string;
   title: string;
@@ -26,7 +26,7 @@ export enum TodoPriority {
   URGENT = 'urgent',
 }
 
-export interface CreateTodoInput {
+export interface CreateTodoDto {
   userId: string;
   title: string;
   description?: string;
@@ -36,7 +36,7 @@ export interface CreateTodoInput {
   orderIndex?: number;
 }
 
-export interface UpdateTodoInput {
+export interface UpdateTodoDto {
   id: string;
   userId: string;
   title?: string;
@@ -47,17 +47,17 @@ export interface UpdateTodoInput {
   orderIndex?: number;
 }
 
-export interface DeleteTodoInput {
+export interface DeleteTodoDto {
   id: string;
   userId: string;
 }
 
-export interface GetTodoByIdInput {
+export interface GetTodoByIdDto {
   id: string;
   userId: string;
 }
 
-export interface ListTodosInput {
+export interface ListTodosDto {
   userId: string;
   status?: TodoStatus;
   priority?: TodoPriority;
@@ -67,15 +67,15 @@ export interface ListTodosInput {
   sortOrder?: 'asc' | 'desc';
 }
 
-export interface ListTodosOutput {
-  todos: Todo[];
+export interface ListTodosResultDto {
+  todos: TodoDto[];
   total: number;
   page: number;
   limit: number;
   totalPages: number;
 }
 
-export interface BulkUpdateTodosInput {
+export interface BulkUpdateTodosDto {
   userId: string;
   updates: Array<{
     id: string;
@@ -84,7 +84,7 @@ export interface BulkUpdateTodosInput {
   }>;
 }
 
-export interface CreateTodoRequest {
+export interface CreateTodoRequestDto {
   title: string;
   description?: string;
   status?: TodoStatus;
@@ -93,7 +93,7 @@ export interface CreateTodoRequest {
   orderIndex?: number;
 }
 
-export interface UpdateTodoRequest {
+export interface UpdateTodoRequestDto {
   title?: string;
   description?: string;
   status?: TodoStatus;
@@ -102,17 +102,17 @@ export interface UpdateTodoRequest {
   orderIndex?: number;
 }
 
-export interface BulkUpdateTodoRequest {
+export interface BulkUpdateTodoRequestDto {
   id: string;
   status?: TodoStatus;
   orderIndex?: number;
 }
 
-export interface BulkUpdateTodosRequest {
-  updates: BulkUpdateTodoRequest[];
+export interface BulkUpdateTodosRequestDto {
+  updates: BulkUpdateTodoRequestDto[];
 }
 
-export interface ListTodosQuery {
+export interface ListTodosQueryDto {
   status?: TodoStatus;
   priority?: TodoPriority;
   page?: number;
