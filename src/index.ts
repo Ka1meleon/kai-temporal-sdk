@@ -24,6 +24,7 @@ export * from './models/meetings/meeting-meeting-agenda-category.dto';
 export * from './models/meetings/meeting-meeting-agenda-item.dto';
 export * from './models/meetings/update-meeting.dto';
 export * from './models/meetings/update-meeting-agenda-items.dto';
+export * from './models/meetings/generate-meeting-summary.dto';
 
 // Todo types
 export * from './models/todo';

@@ -1,5 +1,6 @@
 export interface GenerateMeetingSummaryDto {
   transcription: string;
+  language?: string;
 }
 
 export interface MeetingSummaryDto {
