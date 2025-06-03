@@ -10,7 +10,7 @@ export class MeetingDto {
   actionItems?: string[];
   decisionsMade?: string[];
   agenda?: MeetingMeetingAgenda | null;
-  transcription?: string;
+  transcriptionId?: string;
   language?: string;
   createdAt?: string;
   updatedAt?: string;
