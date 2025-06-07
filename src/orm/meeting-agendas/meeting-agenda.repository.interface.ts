@@ -13,5 +13,6 @@ export interface IMeetingAgendaRepository {
     agendaId: string,
     updates: Partial<MeetingAgendaDto>,
   ): Promise<MeetingAgendaDto | null>;
-  deleteForUser(userId: string, agendaId: string): Promise<boolean>;
+  deleteForUser(userId: string, agendaId: string): Promise<{ deleted: boolean; rowCount: number }>;
+  processQueryParams(query: GetMeetingAgendasQuery): GetMeetingAgendasQuery;
 }

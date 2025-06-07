@@ -6,5 +6,13 @@ export interface ITranscriptionRepository {
   findByContextId(userId: string, contextId: string): Promise<TranscriptionDto | null>;
   findByContextIds(userId: string, contextIds: string[]): Promise<TranscriptionDto[]>;
   list(userId: string, limit?: number): Promise<TranscriptionDto[]>;
-  deleteForUser(userId: string, transcriptionId: string): Promise<boolean>;
+  updateForUser(
+    userId: string,
+    transcriptionId: string,
+    updates: Partial<TranscriptionDto>,
+  ): Promise<TranscriptionDto | null>;
+  deleteForUser(
+    userId: string,
+    transcriptionId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }>;
 }

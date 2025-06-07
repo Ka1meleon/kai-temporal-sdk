@@ -92,18 +92,45 @@ export class TranscriptionRepository
     return data.map(row => this.convertToDto(row));
   }
 
-  async deleteForUser(userId: string, transcriptionId: string): Promise<boolean> {
-    const { error } = await this.supabase
+  async updateForUser(
+    userId: string,
+    transcriptionId: string,
+    updates: Partial<TranscriptionDto>,
+  ): Promise<TranscriptionDto | null> {
+    const updateData = this.convertToTableRow(updates);
+
+    const { data, error } = await this.supabase
       .from('transcriptions')
-      .delete()
+      .update(updateData)
       .eq('user_id', userId)
-      .eq('id', transcriptionId);
+      .eq('id', transcriptionId)
+      .select()
+      .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return false;
+      if (error.code === 'PGRST116') return null;
       throw error;
     }
 
-    return true;
+    return this.convertToDto(data);
+  }
+
+  async deleteForUser(
+    userId: string,
+    transcriptionId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }> {
+    const { data, error } = await this.supabase
+      .from('transcriptions')
+      .delete()
+      .eq('user_id', userId)
+      .eq('id', transcriptionId)
+      .select();
+
+    if (error) {
+      if (error.code === 'PGRST116') return { deleted: false, rowCount: 0 };
+      throw error;
+    }
+
+    return { deleted: true, rowCount: data ? 1 : 0 };
   }
 }

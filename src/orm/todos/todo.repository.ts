@@ -123,6 +123,8 @@ export class TodoRepository
 
     if (updates.status === TodoStatus.DONE && !updates.completedAt) {
       updateData.completed_at = new Date().toISOString();
+    } else if (updates.status && updates.status !== TodoStatus.DONE) {
+      updateData.completed_at = null;
     }
 
     const { data, error } = await this.supabase
@@ -141,18 +143,60 @@ export class TodoRepository
     return this.convertToDto(data);
   }
 
-  async deleteForUser(userId: string, todoId: string): Promise<boolean> {
-    const { error } = await this.supabase
+  async updateStatus(userId: string, todoId: string, status: TodoStatus): Promise<TodoDto | null> {
+    const updates: Partial<TodoTableRow> = { status };
+
+    if (status === TodoStatus.DONE) {
+      updates.completed_at = new Date().toISOString();
+    } else {
+      updates.completed_at = null;
+    }
+
+    const { data, error } = await this.supabase
       .from('todos')
-      .delete()
+      .update(updates)
       .eq('user_id', userId)
-      .eq('id', todoId);
+      .eq('id', todoId)
+      .select()
+      .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return false;
+      if (error.code === 'PGRST116') return null;
       throw error;
     }
 
-    return true;
+    return this.convertToDto(data);
+  }
+
+  async deleteForUser(
+    userId: string,
+    todoId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }> {
+    const { data, error } = await this.supabase
+      .from('todos')
+      .delete()
+      .eq('user_id', userId)
+      .eq('id', todoId)
+      .select();
+
+    if (error) {
+      if (error.code === 'PGRST116') return { deleted: false, rowCount: 0 };
+      throw error;
+    }
+
+    return { deleted: true, rowCount: data ? 1 : 0 };
+  }
+
+  processQueryParams(query: GetTodosQuery): GetTodosQuery {
+    return {
+      page: Number(query.page) || 1,
+      limit: Number(query.limit) || 10,
+      status: query.status,
+      priority: query.priority,
+      sortBy: query.sortBy || 'createdAt',
+      sortOrder: query.sortOrder || 'desc',
+      fromDate: query.fromDate,
+      toDate: query.toDate,
+    };
   }
 }

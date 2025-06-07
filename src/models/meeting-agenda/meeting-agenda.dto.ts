@@ -26,6 +26,6 @@ export interface MeetingAgendaCategoryDto {
 export interface MeetingAgendaItemDto {
   id?: string;
   title: string;
-  discussed: boolean;
+  duration?: number;
   order?: number;
 }

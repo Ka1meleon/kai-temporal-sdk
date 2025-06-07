@@ -153,6 +153,41 @@ export class ConversationRepository
     return this.convertToDto(data);
   }
 
+  async findByUserIdAndIdWithMessages(
+    userId: string,
+    conversationId: string,
+  ): Promise<ConversationDto | null> {
+    const { data, error } = await this.supabase
+      .from('conversations')
+      .select()
+      .eq('user_id', userId)
+      .eq('id', conversationId)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return null;
+      throw error;
+    }
+
+    return this.convertToDto(data);
+  }
+
+  async findByContextId(userId: string, contextId: string): Promise<ConversationDto | null> {
+    const { data, error } = await this.supabase
+      .from('conversations')
+      .select()
+      .eq('user_id', userId)
+      .eq('context_id', contextId)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return null;
+      throw error;
+    }
+
+    return this.convertToDto(data);
+  }
+
   async updateTitle(
     userId: string,
     contextId: string,
@@ -174,18 +209,41 @@ export class ConversationRepository
     return this.convertToDto(data);
   }
 
-  async deleteForUser(userId: string, conversationId: string): Promise<boolean> {
-    const { error } = await this.supabase
+  async deleteForUser(
+    userId: string,
+    conversationId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }> {
+    const { data, error } = await this.supabase
       .from('conversations')
       .delete()
       .eq('user_id', userId)
-      .eq('id', conversationId);
+      .eq('id', conversationId)
+      .select();
 
     if (error) {
-      if (error.code === 'PGRST116') return false;
+      if (error.code === 'PGRST116') return { deleted: false, rowCount: 0 };
       throw error;
     }
 
-    return true;
+    return { deleted: true, rowCount: data ? 1 : 0 };
+  }
+
+  async deleteByContextId(
+    userId: string,
+    contextId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }> {
+    const { data, error } = await this.supabase
+      .from('conversations')
+      .delete()
+      .eq('user_id', userId)
+      .eq('context_id', contextId)
+      .select();
+
+    if (error) {
+      if (error.code === 'PGRST116') return { deleted: false, rowCount: 0 };
+      throw error;
+    }
+
+    return { deleted: true, rowCount: data ? 1 : 0 };
   }
 }

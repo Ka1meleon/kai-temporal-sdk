@@ -119,18 +119,32 @@ export class MeetingAgendaRepository
     return this.convertToDto(data);
   }
 
-  async deleteForUser(userId: string, agendaId: string): Promise<boolean> {
-    const { error } = await this.supabase
+  async deleteForUser(
+    userId: string,
+    agendaId: string,
+  ): Promise<{ deleted: boolean; rowCount: number }> {
+    const { data, error } = await this.supabase
       .from('agendas')
       .delete()
       .eq('user_id', userId)
-      .eq('id', agendaId);
+      .eq('id', agendaId)
+      .select();
 
     if (error) {
-      if (error.code === 'PGRST116') return false;
+      if (error.code === 'PGRST116') return { deleted: false, rowCount: 0 };
       throw error;
     }
 
-    return true;
+    return { deleted: true, rowCount: data ? 1 : 0 };
+  }
+
+  processQueryParams(query: GetMeetingAgendasQuery): GetMeetingAgendasQuery {
+    return {
+      page: Number(query.page) || 1,
+      limit: Number(query.limit) || 10,
+      search: query.search,
+      sort: query.sort || 'createdAt',
+      sortDirection: (query.sortDirection || 'DESC') as SortDirection,
+    };
   }
 }
