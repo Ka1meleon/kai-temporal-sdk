@@ -56,7 +56,7 @@ Located in `src/models/meeting-agenda/`
 **Core DTOs:**
 - **MeetingAgendaDto**: Agenda with categories and items
 - **MeetingAgendaCategoryDto**: Category with ordered items
-- **MeetingAgendaItemDto**: Individual agenda item with `discussed` status
+- **MeetingAgendaItemDto**: Individual agenda item with optional `duration` and `order` fields
 
 **Request/Response DTOs:**
 - **PostMeetingAgendaRequestDto**: Create agenda request
@@ -134,19 +134,30 @@ Located in `src/orm/base/`
 - `list()`: List todos with pagination and filtering
 - `findByUserIdAndId()`: Get specific todo
 - `updateForUser()`: Update todo
-- `deleteForUser()`: Delete todo
+- `updateStatus()`: Update todo status with automatic completedAt handling
+- `deleteForUser()`: Delete todo (returns `{deleted: boolean, rowCount: number}`)
+- `processQueryParams()`: Process and validate query parameters
 
 **Meeting Repository** (`src/orm/meetings/`):
 - Standard CRUD operations
 - `findByTranscriptionId()`: Find meeting by transcription
+- `listWithTranscriptions()`: List meetings with their transcriptions included
+- `findByUserIdAndIdWithTranscription()`: Get meeting with full transcription
+- `validateDateRange()`: Validate date range parameters
+- `deleteForUser()`: Delete meeting (returns `{deleted: boolean, rowCount: number}`)
 
 **Meeting Agenda Repository** (`src/orm/meeting-agendas/`):
 - Standard CRUD operations for agendas
 
 **Conversation Repository** (`src/orm/conversations/`):
-- `createOrUpdate()`: Upsert conversation
+- `createOrUpdate()`: Upsert conversation with 5 parameters (userId, contextId, channel, title, message)
 - `getMessages()`: Get conversation messages
+- `findByUserIdAndId()`: Get conversation by ID
+- `findByUserIdAndIdWithMessages()`: Get conversation with all messages
+- `findByContextId()`: Find conversation by context ID
 - `updateTitle()`: Update conversation title
+- `deleteForUser()`: Delete conversation (returns `{deleted: boolean, rowCount: number}`)
+- `deleteByContextId()`: Delete by context ID (returns `{deleted: boolean, rowCount: number}`)
 
 **Email Repositories** (`src/orm/emails/`):
 - **EmailProcessingResultRepository**: Store email analysis
@@ -157,6 +168,9 @@ Located in `src/orm/base/`
 **Transcription Repository** (`src/orm/transcriptions/`):
 - `createForUser()`: Create transcription
 - `findByContextId()`: Find by context ID
+- `findByUserIdAndId()`: Get specific transcription
+- `updateForUser()`: Update transcription
+- `deleteForUser()`: Delete transcription (returns `{deleted: boolean, rowCount: number}`)
 
 **User Account Repositories** (`src/orm/user-accounts/`):
 - **UserAccountRepository**: Manage user accounts
@@ -190,3 +204,20 @@ const createdTodo = await repository.createForUser('user-456', newTodo);
 - All timestamps are ISO 8601 strings
 - Repositories handle user-scoped operations for security
 - Pagination is standardized across all list operations
+- All delete operations return `{deleted: boolean, rowCount: number}` for consistency
+- Repository methods handle completedAt timestamps automatically for status changes
+- Transcriptions are fetched by context_id (not foreign key) for flexibility
+
+## Version History
+
+### v1.4.1
+- Added enhanced ORM methods for better service layer abstraction:
+  - `listWithTranscriptions()` and `findByUserIdAndIdWithTranscription()` for Meeting repository
+  - `updateStatus()` with automatic completedAt handling for Todo repository
+  - `findByContextId()` and `deleteByContextId()` for Conversation repository
+  - `validateDateRange()` for Meeting repository
+  - `processQueryParams()` for Todo repository
+- Standardized all delete operations to return `{deleted: boolean, rowCount: number}`
+- Updated `MeetingAgendaItemDto` to remove `discussed` field and add optional `duration`
+- Added `updateForUser()` method to Transcription repository
+- Fixed transcription fetching to use context_id instead of foreign key references
