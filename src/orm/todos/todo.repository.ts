@@ -47,6 +47,7 @@ export class TodoRepository
       sortOrder = 'desc',
       fromDate,
       toDate,
+      search,
     } = query;
 
     const offset = (page - 1) * limit;
@@ -70,6 +71,10 @@ export class TodoRepository
 
     if (toDate) {
       supabaseQuery = supabaseQuery.lte('due_date', toDate);
+    }
+
+    if (search) {
+      supabaseQuery = supabaseQuery.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
     }
 
     const sortColumn = this.camelToSnake(sortBy);
@@ -197,6 +202,7 @@ export class TodoRepository
       sortOrder: query.sortOrder || 'desc',
       fromDate: query.fromDate,
       toDate: query.toDate,
+      search: query.search,
     };
   }
 }

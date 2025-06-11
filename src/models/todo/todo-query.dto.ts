@@ -9,4 +9,5 @@ export interface GetTodosQuery {
   sortOrder?: 'asc' | 'desc';
   fromDate?: string;
   toDate?: string;
+  search?: string;
 }
