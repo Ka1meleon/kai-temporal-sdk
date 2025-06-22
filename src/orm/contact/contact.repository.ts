@@ -8,8 +8,8 @@ export class ContactRepository
   extends BaseRepository<ContactDto, ContactTableRow>
   implements IContactRepository
 {
-  constructor(private supabase: SupabaseClient) {
-    super();
+  constructor(supabase: SupabaseClient) {
+    super(supabase);
   }
 
   async create(data: Omit<ContactDto, 'id' | 'created_at'>): Promise<ContactDto> {
