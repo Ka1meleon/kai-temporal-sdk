@@ -1,4 +1,5 @@
 export * from './base';
+export * from './contact';
 export * from './todos';
 export * from './meetings';
 export * from './meeting-agendas';

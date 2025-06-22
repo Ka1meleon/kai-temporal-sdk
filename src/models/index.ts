@@ -1,4 +1,5 @@
 export * from './common';
+export * from './contact';
 export * from './conversations';
 export * from './deepgram';
 export * from './gmail-auth';
