@@ -6,6 +6,7 @@ export interface ContactTableRow {
   email: string;
   bedrijf?: string | null;
   bericht: string;
+  website?: string | null;
   created_at: Date;
 }
 

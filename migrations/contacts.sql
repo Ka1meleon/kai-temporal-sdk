@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS contacts (
   email TEXT NOT NULL,
   bedrijf TEXT,
   bericht TEXT NOT NULL,
+  website TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

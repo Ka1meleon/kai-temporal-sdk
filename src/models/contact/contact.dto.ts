@@ -4,5 +4,6 @@ export interface ContactDto {
   email: string;
   bedrijf?: string;
   bericht: string;
+  website?: string;
   created_at?: Date;
 }
