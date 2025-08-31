@@ -5,6 +5,7 @@ export interface IUserAccountRepository {
   findByUserId(userId: string): Promise<UserAccountDto | null>;
   updateForUser(userId: string, updates: Partial<UserAccountDto>): Promise<UserAccountDto | null>;
   deleteForUser(userId: string): Promise<boolean>;
+  deleteUserAndAccount(userId: string): Promise<boolean>;
   updateAuthProvider(
     userId: string,
     provider: string,

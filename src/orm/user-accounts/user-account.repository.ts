@@ -70,6 +70,11 @@ export class UserAccountRepository
     return this.convertToDto(data);
   }
 
+  /**
+   * Deletes only the user account data, leaving the auth user intact.
+   * The user will still be able to log in again.
+   * Use deleteUserAndAccount() if you want to prevent re-login.
+   */
   async deleteForUser(userId: string): Promise<boolean> {
     const { error } = await this.supabase.from('user_accounts').delete().eq('user_id', userId);
 
@@ -79,6 +84,41 @@ export class UserAccountRepository
     }
 
     return true;
+  }
+
+  /**
+   * Completely removes the user from the system by deleting both:
+   * 1. Auth user (auth.users table) 
+   * 2. ALL related data across ALL tables (via CASCADE)
+   * 
+   * After this operation, the user will NOT be able to log in again.
+   * 
+   * IMPORTANT: This will delete ALL user data including:
+   * - user_accounts, transcriptions, todos, notes, meetings
+   * - email_actions, email_extracted_tasks, email_processing_results  
+   * - email_response_drafts, conversations, agendas
+   * 
+   * All tables use ON DELETE CASCADE, so no data corruption will occur.
+   * Use this method when you want to permanently remove a user and all their data.
+   */
+  async deleteUserAndAccount(userId: string): Promise<boolean> {
+    try {
+      // Delete the user from Supabase Auth
+      // This will CASCADE and delete ALL related data automatically
+      const { error: authError } = await this.supabase.auth.admin.deleteUser(userId);
+
+      if (authError) {
+        console.error('Failed to delete user from auth:', authError);
+        throw new Error(`Failed to delete user from authentication system: ${authError.message}`);
+      }
+
+      // SUCCESS: The CASCADE constraints ensure all related data is automatically deleted
+      // No manual cleanup needed - PostgreSQL handles referential integrity
+      return true;
+    } catch (error) {
+      console.error('Error in deleteUserAndAccount:', error);
+      throw error;
+    }
   }
 
   async updateAuthProvider(
